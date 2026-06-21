@@ -49,6 +49,43 @@ Decoding the midterm colors revealed:
 
 ---
 
+## 1b. Compound-question structure (important)
+
+A key structural fact: this lecturer's open questions are frequently **two basic questions stapled into one** — “describe X … *and* describe/compare Y.” The midterm confirms it; many green questions were already two-part:
+
+- “Quartz resonator **and** clock generator purpose”
+- “Multiprocessor system essence. **What conditions** must a computer meet…”
+- “Multiprocessor modes. **Comparative analysis** of them”
+- “Math coprocessor purpose? **When** is it effective…”
+- “PGA, PGA2 **and** SPGA … **comparative analysis**”
+- “Socket vs Slot … **and** what drove Slot in Pentium II”
+- “Radiator materials **and** how it is mounted”
+- “Passive **and** active cooling … **when** is each used”
+
+### Two consequences for the final
+
+1. **Inherently two-part questions get a boost** — a single question that already contains two parts is exactly his preferred shape. This *rescues* a few questions I had demoted (notably **ch.15 Q1**, which is “sector/track/cylinder essence **+** list main parameters” — a textbook two-part).
+2. **Two related single-topic questions may be merged** — so studying *pairs* of neighboring topics together is smart, because the exam may ask both halves in one question.
+
+### Most probable compound pairings (study these as a unit)
+
+| Likely combined question | Parts |
+|---|---|
+| Color modes | ch.17 Q6 (Hi-Color/Real Color) **+** Q7 (True Color) |
+| Writable optical discs | ch.16 Q3 (CD-R) **+** Q4 (CD-RW) |
+| File systems | ch.15 Q14 (FAT32/exFAT) **+** Q15 (NTFS) |
+| PSU control signals | ch.13 Q4 (Power Good) **+** Q5 (Power_On / +5V Stand By) |
+| Wireless/flexible USB | ch.12 Q6 (USB OTG) **+** Q7 (USB Wireless) |
+| Data transmission | ch.10 Q3 (single-conductor) **+** Q4 (differential), or framed as Q5 comparison |
+| Monitor operating modes | ch.17 Q1 (text/alphanumeric) **+** Q2 (graphics) |
+| Intel technologies | any two of ch.14 Q9–Q14 asked together |
+| DDR generations | e.g. ch.9 Q17 (DDR3) **+** Q20 (DDR4) |
+| ROM | ch.8 Q1 (ROM purpose) **+** Q9 (ROM chip types) |
+
+> **Note:** the “monitor modes” (ch.17 Q1+Q2) and “ROM” (ch.8 Q1+Q9) pairings are the main reason some Tier-C items can still surface — individually weak, but a natural two-part combo. Likewise **ch.15 Q1** effectively moves up from Tier C toward Tier B because it is already a compound question.
+
+---
+
 ## 2. Full ranking (1 → 113, most → least likely)
 
 ### 🟩 Tier S — his clear favorites (study first)
@@ -194,5 +231,7 @@ Decoding the midterm colors revealed:
 ## 3. Bottom line
 
 If betting on the 5 open questions, lock in **Tier S** plus the **ch.14 Intel-technology block** (Tier A). Comparisons + named technologies are this lecturer's fingerprint, and chapters 14–17 are rich in exactly that.
+
+Because his questions are typically **two-part**, prepare answers as *pairs*: for each Tier S/A topic, also be ready for a likely “… and describe/compare [neighboring topic]” second half (see the compound-pairing table in section 1b).
 
 **Caveat:** the midterm covered chapters 4–6 (processors); the final covers 8–17. This transfers his *style* forward (reliable), but a second emphasized midterm would tighten the prediction further. The single strongest override is anything he explicitly stressed in lectures.
