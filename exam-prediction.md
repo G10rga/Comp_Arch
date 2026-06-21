@@ -90,9 +90,10 @@ A key structural fact: this lecturer's open questions are frequently **two basic
 
 ### 🟩 Tier S — his clear favorites (study first)
 
-| # | Chapter | Q# | Topic | Why |
+| # | Chapter | Q# | Topic | Why | კითხვა | პასუხი |
 |---|---|---|---|---|
-| 1 | ch.11 | Q4 | SATA vs ATA | Comparison — his #1 favorite format |
+| 1 | ch.11 | Q4 | SATA vs ATA | Comparison — his #1 favorite format |რა უპირატესობები გააჩნია SATA ინტერფეისს ATA ინტერფეისთან შედარებით?|SATA მიმდევრობითი ინტერფეისია და პარალელურ ATA-სთან შედარებით ნაკლებ გამტარს იყენებს. ეს ამარტივებს კაბელის
+დამზადებას, ამცირებს ღირებულებას, აუმჯობესებს ვენტილაციას და თავიდან იცილებს პარალელური ATA-ს ფაზურ ძვრას. წყარო:|
 | 2 | ch.8 | Q8 | UEFI vs classic BIOS | Named modern tech + comparison |
 | 3 | ch.10 | Q5 | Single-ended vs differential bus | Comparison |
 | 4 | ch.9 | Q6 | DRAM vs SRAM | Comparison |
