@@ -1,238 +1,534 @@
-# Computer Architecture — Final Exam Question Prediction
+# კომპიუტერის არქიტექტურა — ფინალის სასწავლო გზამკვლევი (რანჟირებული)
 
-**Subject:** Computer Hardware & Architecture (chapters 8–17)
-**Source pool:** `allweeks.pdf` — 113 questions/answers
-**Exam format:** 5 open (written) questions
-**Method:** Pattern analysis of the lecturer's midterm emphasis (chapters 4–6), transferred forward to the final's chapters.
+**წყარო:** allweeks.pdf (თავები 8–17, 113 კითხვა-პასუხი)
+**ფორმატი:** 5 ღია (წერითი) კითხვა
+**მეთოდი:** ლექტორის მიდტერმის (თავები 4–6) აქცენტების ანალიზი → გადატანილი ფინალის თავებზე.
+
+> ეს არის სრული სასწავლო გზამკვლევი: ყველა 113 კითხვა დალაგებულია ყველაზე სავარაუდოდან → ნაკლებად სავარაუდომდე, თითოეულს თან ახლავს ნამდვილი კითხვა + პასუხი და მოკლე დასაბუთება.
 
 ---
 
-## 1. How this ranking was built
+## 1. რანჟირების ლოგიკა (რატომ ასე)
 
-This is **not** a generic "how exams usually work" guess. It is reverse-engineered from the lecturer's *own* behavior, using the midterm document (`arkitektura 4-6.docx`) where the questions he emphasized were marked in **green**.
+ეს არ არის ზოგადი გამოცნობა — ეს ლექტორის *საკუთარი* ქცევიდან არის ამოღებული. მიდტერმის დოკუმენტში მწვანედ მონიშნული კითხვები იყო ის, რასაც ის აქცენტს უკეთებდა.
 
-Decoding the midterm colors revealed:
+**რას უსვამს ხაზს (მწვანე):**
+1. **დასახელებული ტექნოლოგიები** — ყველა „Intel X technology" კითხვა მწვანე იყო (MMX, SSE, AVX, Hyper-threading, Turbo Boost, Tick-Tock, Smart Cache და ა.შ.).
+2. **შედარებითი ანალიზი / „შეადარეთ"** — Xeon vs Core, PGA vs SPGA, Socket vs Slot, პასიური vs აქტიური გაგრილება.
+3. **მექანიზმი / „როგორ მუშაობს"** — superscalar, branch prediction, speculative execution, micro-ops cache.
 
-- **Green `00B050`** = emphasized questions
-- **Blue `1F3864` / `002060`** = normal (not emphasized) questions
-- **Red `EE0000`** = lecture/chapter headers
-- **Black `000000`** = answers
+**რას არ უსვამს ხაზს (ლურჯი):**
+1. **მარტივი „დანიშნულება / განმარტება"** — „რა არის X-ის დანიშნულება", „რომელი ფირმები", „ჩამოთვალეთ მახასიათებლები".
+2. **ისტორიული მოდელების აღწერა** (Pentium I/II/III/4/D).
+3. **გამოთვლები და overclocking-ის მეთოდები.**
 
-### What the lecturer EMPHASIZED (green)
+**ფინგერპრინტი:** *ის ამოწმებს დასახელებულ ტექნოლოგიებს, შედარებებსა და მექანიზმებს — არა განმარტებებს, სპეციფიკაციებსა და არითმეტიკას.*
 
-1. **Named technologies** — *every single* "Intel X technology" question was green (Wide Dynamic Execution, Intelligent Power Capability, Advanced Smart Cache, Smart Memory Access, Advanced Digital Media Boost, Turbo Boost, Tick-Tock, Process-Architecture-Optimization), plus MMX, SSE, AVX, Hyper-threading, NetBurst.
-2. **Comparison / “შედარებითი ანალიზი” questions** — Xeon vs Core, Pentium D vs Extreme Edition, PGA vs PGA2 vs SPGA, Socket vs Slot, LGA vs predecessors, passive vs active cooling, multiprocessor mode comparison.
-3. **Mechanism / “how it works” concepts** — superscalar architecture, dynamic execution, branch prediction, speculative execution, data-flow analysis, micro-ops cache, hyperpipelining.
+---
 
-### What the lecturer DE-EMPHASIZED (blue)
+## 1b. ორნაწილიანი (compound) კითხვების სტრუქტურა — მნიშვნელოვანი
 
-1. **Basic “purpose / definition” questions** — “what is a CPU’s purpose,” “which firms make CPUs,” “list the main characteristics,” “cache purpose,” “addressable-memory formula.” All blue.
-2. **Plain historical-model descriptions** — “describe Pentium I/II/III/4/D features.” All blue.
-3. **Overclocking *methods* and pure calculations.** Blue.
+ლექტორის ღია კითხვები ხშირად **ორი მარტივი კითხვაა ერთში გაერთიანებული** — „აღწერეთ X … *და* აღწერეთ/შეადარეთ Y". მიდტერმი ამას ადასტურებს (მაგ. „კვარცული რეზონატორი **და** სატაქტო გენერატორი", „PGA, PGA2 **და** SPGA … შედარებითი ანალიზი").
 
-**Conclusion / fingerprint:** *He tests named technologies, comparisons, and mechanisms — not textbook definitions, spec sheets, or arithmetic.*
+**ორი დასკვნა:**
+1. **თავისთავად ორნაწილიანი კითხვები იმატებენ წონაში** — ეს არის მისი საყვარელი ფორმა (ამიტომ თ.15 კ.1 „სექტორი/ბილიკი/ცილინდრი **+** ჩამოთვალეთ პარამეტრები" ადის C-დან B-სკენ).
+2. **ორი მონათესავე კითხვა შეიძლება გაერთიანდეს** — ამიტომ წყვილებად ისწავლეთ.
 
-### How that maps onto the final (chapters 8–17)
+**ყველაზე სავარაუდო წყვილები (ისწავლეთ ერთად):**
 
-| Midterm signal (green) | Final-exam analog (ranked high) |
+| სავარაუდო გაერთიანებული კითხვა | ნაწილები |
 |---|---|
-| Every Intel-technology question | ch.14 Q9–Q14 (Quiet System, Fast Memory Access, Clear Video, HD Audio, Turbo Memory, Matrix Storage) |
-| Comparison questions | SATA vs ATA, PCI vs PCIe, USB 2.0 vs 3.0, DRAM vs SRAM, single-ended vs differential, CD-DA vs CD-ROM, DDR4 vs DDR3 |
-| Mechanism/concept questions | serial vs parallel, differential transmission, FSB/DMI, zone-bit recording |
-| “Core i” was heavily greened | ch.14 Q15 Core i platform |
-
-| Midterm signal (blue) | Final-exam analog (ranked low) |
-|---|---|
-| “Purpose / which firms” (Q1+Q2) | ch.8 Q1 ROM purpose, ch.8 Q2 BIOS purpose+firms |
-| “List the main characteristics” | ch.15 Q1 sector/track/cylinder + list parameters |
-| Calculations & overclocking methods | all calc questions, all connector pinouts |
-
----
-
-## 1b. Compound-question structure (important)
-
-A key structural fact: this lecturer's open questions are frequently **two basic questions stapled into one** — “describe X … *and* describe/compare Y.” The midterm confirms it; many green questions were already two-part:
-
-- “Quartz resonator **and** clock generator purpose”
-- “Multiprocessor system essence. **What conditions** must a computer meet…”
-- “Multiprocessor modes. **Comparative analysis** of them”
-- “Math coprocessor purpose? **When** is it effective…”
-- “PGA, PGA2 **and** SPGA … **comparative analysis**”
-- “Socket vs Slot … **and** what drove Slot in Pentium II”
-- “Radiator materials **and** how it is mounted”
-- “Passive **and** active cooling … **when** is each used”
-
-### Two consequences for the final
-
-1. **Inherently two-part questions get a boost** — a single question that already contains two parts is exactly his preferred shape. This *rescues* a few questions I had demoted (notably **ch.15 Q1**, which is “sector/track/cylinder essence **+** list main parameters” — a textbook two-part).
-2. **Two related single-topic questions may be merged** — so studying *pairs* of neighboring topics together is smart, because the exam may ask both halves in one question.
-
-### Most probable compound pairings (study these as a unit)
-
-| Likely combined question | Parts |
-|---|---|
-| Color modes | ch.17 Q6 (Hi-Color/Real Color) **+** Q7 (True Color) |
-| Writable optical discs | ch.16 Q3 (CD-R) **+** Q4 (CD-RW) |
-| File systems | ch.15 Q14 (FAT32/exFAT) **+** Q15 (NTFS) |
-| PSU control signals | ch.13 Q4 (Power Good) **+** Q5 (Power_On / +5V Stand By) |
-| Wireless/flexible USB | ch.12 Q6 (USB OTG) **+** Q7 (USB Wireless) |
-| Data transmission | ch.10 Q3 (single-conductor) **+** Q4 (differential), or framed as Q5 comparison |
-| Monitor operating modes | ch.17 Q1 (text/alphanumeric) **+** Q2 (graphics) |
-| Intel technologies | any two of ch.14 Q9–Q14 asked together |
-| DDR generations | e.g. ch.9 Q17 (DDR3) **+** Q20 (DDR4) |
-| ROM | ch.8 Q1 (ROM purpose) **+** Q9 (ROM chip types) |
-
-> **Note:** the “monitor modes” (ch.17 Q1+Q2) and “ROM” (ch.8 Q1+Q9) pairings are the main reason some Tier-C items can still surface — individually weak, but a natural two-part combo. Likewise **ch.15 Q1** effectively moves up from Tier C toward Tier B because it is already a compound question.
+| ფერების რეჟიმები | თ.17 კ.6 (Hi-Color/Real Color) **+** კ.7 (True Color) |
+| ჩამწერი ოპტიკური დისკები | თ.16 კ.3 (CD-R) **+** კ.4 (CD-RW) |
+| ფაილური სისტემები | თ.15 კ.14 (FAT32/exFAT) **+** კ.15 (NTFS) |
+| კვების მმართველი სიგნალები | თ.13 კ.4 (Power Good) **+** კ.5 (Power_On / +5V SB) |
+| USB უგამტარო/მოქნილი | თ.12 კ.6 (OTG) **+** კ.7 (Wireless) |
+| მონაცემთა გადაცემა | თ.10 კ.3 (ერთგამტარიანი) **+** კ.4 (დიფერენციალური), ან კ.5 შედარება |
+| მონიტორის რეჟიმები | თ.17 კ.1 (ტექსტური) **+** კ.2 (გრაფიკული) |
+| Intel ტექნოლოგიები | ნებისმიერი ორი თ.14 კ.9–14-დან |
+| DDR თაობები | მაგ. თ.9 კ.17 (DDR3) **+** კ.20 (DDR4) |
+| ROM | თ.8 კ.1 (ROM დანიშნულება) **+** კ.9 (ROM ჩიპების ტიპები) |
 
 ---
 
-## 2. Full ranking (1 → 113, most → least likely)
+## 2. სასწავლო გზამკვლევი — ყველა კითხვა რანჟირებული (1 → 113)
 
-### 🟩 Tier S — his clear favorites (study first)
+### 🟩 Tier S — მთავარი ფავორიტები (ისწავლე პირველ რიგში)
 
-| # | Chapter | Q# | Topic | Why | კითხვა | პასუხი |
-|---|---|---|---|---|
-| 1 | ch.11 | Q4 | SATA vs ATA | Comparison — his #1 favorite format |რა უპირატესობები გააჩნია SATA ინტერფეისს ATA ინტერფეისთან შედარებით?|SATA მიმდევრობითი ინტერფეისია და პარალელურ ATA-სთან შედარებით ნაკლებ გამტარს იყენებს. ეს ამარტივებს კაბელის
-დამზადებას, ამცირებს ღირებულებას, აუმჯობესებს ვენტილაციას და თავიდან იცილებს პარალელური ATA-ს ფაზურ ძვრას. წყარო:|
-| 2 | ch.8 | Q8 | UEFI vs classic BIOS | Named modern tech + comparison |
-| 3 | ch.10 | Q5 | Single-ended vs differential bus | Comparison |
-| 4 | ch.9 | Q6 | DRAM vs SRAM | Comparison |
-| 5 | ch.12 | Q9 | USB 2.0 vs USB 3.0 | Comparison |
-| 6 | ch.10 | Q11 | PCI vs PCI Express | Comparison |
-| 7 | ch.16 | Q1 | CD-DA vs CD-ROM | Comparison |
-| 8 | ch.14 | Q15 | Core i architecture platform | “Core i” block was heavily greened at midterm |
-| 9 | ch.15 | Q6 | SMART | Named technology |
+**1. [თ.11 · კ.4] — შედარება (მისი #1 ფორმატი)**
+- **კ:** რა უპირატესობები გააჩნია SATA ინტერფეისს ATA ინტერფეისთან შედარებით?
+- **პ:** SATA მიმდევრობითი ინტერფეისია და პარალელურ ATA-სთან შედარებით ნაკლებ გამტარს იყენებს. ეს ამარტივებს კაბელის დამზადებას, ამცირებს ღირებულებას, აუმჯობესებს ვენტილაციას და თავიდან იცილებს პარალელური ATA-ს ფაზურ ძვრას.
 
-### 🟦 Tier A — named technologies & mechanisms (strongly favored)
+**2. [თ.8 · კ.8] — დასახელებული თანამედროვე ტექნოლოგია + შედარება**
+- **კ:** ჩამოთვალეთ, რა სიახლეებია რეალიზებული UEFI BIOS-ში კლასიკურ BIOS-თან შედარებით?
+- **პ:** UEFI BIOS მხარს უჭერს 2 ტბ-ზე დიდ დამგროვებლებს, 128-მდე ლოგიკურ განყოფილებას, Secure Boot-ს, კომპონენტების სენსორულ კონტროლს, გრაფიკულ ინტერფეისს და მაუსს, რამდენიმე ენას, UEFI დრაივერებს და ოპერაციული სისტემის უფრო სწრაფ ჩატვირთვას.
 
-| # | Chapter | Q# | Topic | Why |
-|---|---|---|---|---|
-| 10 | ch.14 | Q9 | Intel Quiet System | Every Intel-tech question was green at midterm |
-| 11 | ch.14 | Q10 | Intel Fast Memory Access | Intel-tech block |
-| 12 | ch.14 | Q11 | Intel Clear Video | Intel-tech block |
-| 13 | ch.14 | Q12 | Intel High Definition Audio | Intel-tech block |
-| 14 | ch.14 | Q13 | Intel Turbo Memory | Intel-tech block |
-| 15 | ch.14 | Q14 | Intel Matrix Storage | Intel-tech block |
-| 16 | ch.14 | Q8 | Legacy Free architecture | Named architecture concept |
-| 17 | ch.14 | Q1 | FSB / DMI function | Core architecture mechanism |
-| 18 | ch.13 | Q4 | Power Good signal | Named signal/mechanism |
-| 19 | ch.13 | Q5 | Power_On / +5V Stand By | Named signal/mechanism |
-| 20 | ch.15 | Q2 | Zone bit recording | Named mechanism |
-| 21 | ch.10 | Q1 | Serial vs parallel transmission | Mechanism + implicit comparison |
-| 22 | ch.12 | Q6 | USB On-The-Go (OTG) | Named technology |
-| 23 | ch.17 | Q7 | True Color | Named mode |
-| 24 | ch.17 | Q6 | Hi-Color / Real Color | Named modes + comparison |
-| 25 | ch.16 | Q3 | CD-R technology | Named technology |
-| 26 | ch.16 | Q4 | CD-RW technology | Named technology |
-| 27 | ch.9 | Q11 | DDR technology | Named technology |
+**3. [თ.10 · კ.5] — შედარება**
+- **კ:** მოახდინეთ ერთგამტარიანი და დიფერენციალური სალტეების შედარებითი ანალიზი.
+- **პ:** ერთგამტარიანი სალტე იაფია, მაგრამ ნაკლებად მდგრადია ხმაურის მიმართ და მოკლე კაბელს მოითხოვს. დიფერენციალური სალტე უფრო რთულია, მაგრამ უკეთ ეწინააღმდეგება შეფერხებებს და იძლევა სიხშირისა და სიგრძის გაზრდის საშუალებას.
 
-### 🟨 Tier B — likely
+**4. [თ.9 · კ.6] — შედარება**
+- **კ:** მოახდინეთ ოპერატიული მეხსიერების ძირითადი ტექნოლოგიური ტიპების შედარებითი ანალიზი.
+- **პ:** DRAM იაფია და მაღალი ინტეგრაციის ხარისხი აქვს, ამიტომ ძირითადი RAM-ისთვის გამოიყენება, მაგრამ შედარებით ნელია და რეგენერაცია სჭირდება. SRAM ბევრად სწრაფია და რეგენერაციას არ საჭიროებს, მაგრამ ძვირია და ნაკლები ტევადობა აქვს, ამიტომ გამოიყენება Cache-მეხსიერებაში.
 
-| # | Chapter | Q# | Topic | Why |
-|---|---|---|---|---|
-| 28 | ch.9 | Q13 | DDR2 technology | Named tech (“არსი” phrasing = green pattern) |
-| 29 | ch.9 | Q17 | DDR3 technology | Named tech |
-| 30 | ch.9 | Q20 | DDR4 technology | Named tech |
-| 31 | ch.9 | Q27 | DDR5 | Named tech |
-| 32 | ch.9 | Q22 | DDR3/DDR4 bus comparison | Comparison |
-| 33 | ch.9 | Q28 | DDR5 vs DDR4 | Comparison |
-| 34 | ch.9 | Q23 | DDR4 vs DDR3 voltage | Comparison |
-| 35 | ch.9 | Q24 | DDR4 vs DDR3 capacity | Comparison |
-| 36 | ch.9 | Q26 | DDR4 vs DDR3 modules | Comparison |
-| 37 | ch.9 | Q25 | DDR4 energy-efficiency cause | Mechanism |
-| 38 | ch.10 | Q4 | Differential transmission | Mechanism |
-| 39 | ch.10 | Q3 | Single-conductor transmission | Mechanism |
-| 40 | ch.10 | Q13 | PCI Express encoding | Mechanism |
-| 41 | ch.10 | Q10 | PCI Express characteristics | Named bus |
-| 42 | ch.10 | Q2 | Interface development trends | Concept |
-| 43 | ch.10 | Q12 | Compatibility principle | Concept |
-| 44 | ch.8 | Q7 | Low- vs high-level drivers | Comparison/mechanism |
-| 45 | ch.8 | Q5 | BIOS load process | Mechanism |
-| 46 | ch.16 | Q2 | Reading info from CD | Mechanism |
-| 47 | ch.16 | Q12 | UDF | Named file system |
-| 48 | ch.15 | Q14 | FAT32 / exFAT | Named file systems + comparison |
-| 49 | ch.15 | Q15 | NTFS | Named file system |
-| 50 | ch.12 | Q7 | USB Wireless | Named technology |
-| 51 | ch.14 | Q5 | I/O Controller Hub | Named component/mechanism |
-| 52 | ch.11 | Q5 | SATA standards | Named-tech adjacent |
-| 53 | ch.11 | Q7 | SATA organizational structure | Mechanism |
-| 54 | ch.11 | Q8 | SATA physical layer | Mechanism |
-| 55 | ch.11 | Q10 | SATA channel layer | Mechanism |
-| 56 | ch.11 | Q11 | SATA error detection/correction | Mechanism |
-| 57 | ch.12 | Q8 | USB 3.0 standard | Named-tech adjacent |
-| 58 | ch.12 | Q4 | USB 2.0 transfer modes | Mechanism |
-| 59 | ch.9 | Q16 | Memory timing | Concept |
-| 60 | ch.9 | Q21 | DDR4 error detection/correction | Mechanism |
+**5. [თ.12 · კ.9] — შედარება**
+- **კ:** შეადარეთ ერთმანეთს USB 2.0 და USB 3.0 სტანდარტები გადაცემის სიჩქარის და სიმძლავრის კუთხით.
+- **პ:** USB 2.0-ის მაქსიმალური სიჩქარეა 480 მბიტ/წმ, USB 3.0-ის — 4.8 გბიტ/წმ. USB 2.0-ში მაქსიმალური დენი 500 მა-ია, USB 3.0-ში — 900 მა.
 
-### ⬜ Tier C — de-emphasized (definition / spec types)
+**6. [თ.10 · კ.11] — შედარება**
+- **კ:** ჩამოაყალიბეთ განსხვავებები PCI და PCI Express სალტეებს შორის.
+- **პ:** PCI პარალელური სალტეა, PCI Express კი მიმდევრობითი. PCI-ში მონაცემები ერთი მიმართულებით გადაიცემა და ბევრი გამტარი გამოიყენება; PCI Express დუპლექსურია, ტრასებით მუშაობს და ბევრად უფრო მაღალ გამტარუნარიანობას იძლევა.
 
-| # | Chapter | Q# | Topic | Why low |
-|---|---|---|---|---|
-| 61 | ch.8 | Q1 | ROM purpose | “Purpose” definition — blue at midterm |
-| 62 | ch.8 | Q2 | BIOS purpose + manufacturers | Direct analog to blue midterm Q1+Q2 |
-| 63 | ch.15 | Q1 | Sector/track/cylinder + list parameters | Analog to blue “list main characteristics” |
-| 64 | ch.13 | Q1 | PSU purpose | “Purpose” definition |
-| 65 | ch.15 | Q5 | HDD cache purpose | “Purpose” definition (cache purpose was blue) |
-| 66 | ch.12 | Q1 | USB port advantages | Basic listing |
-| 67 | ch.9 | Q3 | RAM structure | Basic description |
-| 68 | ch.9 | Q4 | Register memory | Basic description |
-| 69 | ch.9 | Q2 | Program load order | Basic description |
-| 70 | ch.11 | Q2 | ATA objects | Spec listing |
-| 71 | ch.17 | Q3 | Resolution | Basic definition |
-| 72 | ch.17 | Q1 | Text (alphanumeric) mode | Basic description |
-| 73 | ch.17 | Q2 | Graphics mode | Basic description |
-| 74 | ch.17 | Q5 | VGA analog signals | Narrow concept |
-| 75 | ch.17 | Q8 | VGA / DVI / HDMI | Comparison (saves it from Tier D) but interface-spec heavy |
-| 76 | ch.8 | Q4 | BIOS subprograms | Listing |
-| 77 | ch.8 | Q6 | POST results | Listing |
-| 78 | ch.8 | Q9 | ROM chip types | Listing |
-| 79 | ch.8 | Q3 | CMOS Setup location/power | Narrow spec |
-| 80 | ch.13 | Q6 | ATX standard | Standard description |
-| 81 | ch.16 | Q11 | CD writing methods | Listing |
-| 82 | ch.15 | Q7 | SMART analyzed parameters | Listing (the SMART *concept* ranks high, this listing does not) |
-| 83 | ch.15 | Q12 | Low-level formatting | Narrow |
-| 84 | ch.15 | Q13 | Partitioning | Narrow |
-| 85 | ch.15 | Q16 | Logical formatting | Narrow |
-| 86 | ch.15 | Q8 | Register filter | Narrow component |
-| 87 | ch.15 | Q9 | Barometric filter | Narrow component |
-| 88 | ch.15 | Q10 | Cache types | Listing |
-| 89 | ch.9 | Q7 | DIP array drawbacks | Narrow spec |
+**7. [თ.16 · კ.1] — შედარება**
+- **კ:** რა განსხვავებაა CD-DA და CD-ROM დამგროვებლებს შორის?
+- **პ:** CD-DA მუსიკალური კომპაქტ-დისკების სტანდარტია, ხოლო CD-ROM კომპიუტერული მონაცემებისთვის გამოიყენება. CD-ROM დამგროვებელი CD-DA-სგან შეცდომების აღმოჩენისა და კორექციის დამატებითი შესაძლებლობებით განსხვავდება.
 
-### 🟥 Tier D — lowest (calculations, pinouts, spec trivia — all blue at midterm)
+**8. [თ.14 · კ.15] — „Core i" მიდტერმზე ძლიერ იყო ხაზგასმული**
+- **კ:** აღწერეთ Core i არქიტექტურის სისტემური პლატა.
+- **პ:** Core i არქიტექტურაში მეხსიერების კონტროლერი ჩაშენებულია პროცესორში და მხარს უჭერს ორ ან მეტ მეხსიერების არხს. პროცესორების უმეტესობას ჩაშენებული გრაფიკული პროცესორიც აქვს, რის გამოც სისტემურ პლატაზე Memory Controller Hub / North Bridge ზედმეტი ხდება.
 
-| # | Chapter | Q# | Topic | Why lowest |
-|---|---|---|---|---|
-| 90 | ch.13 | Q2 | PSU output voltages | Spec list |
-| 91 | ch.13 | Q8 | 20-pin connector | Pinout |
-| 92 | ch.13 | Q12 | 24-pin connector | Pinout |
-| 93 | ch.13 | Q9 | ATA connector | Pinout |
-| 94 | ch.13 | Q10 | SATA connector | Pinout |
-| 95 | ch.13 | Q13 | 4-pin ATX 12V | Pinout |
-| 96 | ch.13 | Q14 | 6-pin ATX 12V | Pinout |
-| 97 | ch.13 | Q15 | 8-pin ATX 12V | Pinout |
-| 98 | ch.13 | Q18 | Video adapter power options | Spec |
-| 99 | ch.12 | Q5 | USB 2.0 connectors/pins | Pinout |
-| 100 | ch.12 | Q10 | USB 3.0 connectors/pins | Pinout |
-| 101 | ch.11 | Q13 | SATA cable pins | Pinout |
-| 102 | ch.9 | Q31 | DDR2 min frequency | Calculation |
-| 103 | ch.9 | Q32 | DDR3 min frequency | Calculation |
-| 104 | ch.9 | Q33 | DDR4 min frequency | Calculation |
-| 105 | ch.10 | Q20 | PCIe bandwidth | Calculation |
-| 106 | ch.10 | Q21 | PCIe bandwidth | Calculation |
-| 107 | ch.13 | Q16 | CPU power | Calculation |
-| 108 | ch.13 | Q17 | CPU power | Calculation |
-| 109 | ch.13 | Q19 | Video adapter power | Calculation |
-| 110 | ch.13 | Q20 | Video adapter power | Calculation |
-| 111 | ch.15 | Q3 | Average seek time | Calculation |
-| 112 | ch.15 | Q4 | Transfer rate | Calculation |
-| 113 | ch.16 | Q5 | CD-ROM transfer rate | Calculation |
+**9. [თ.15 · კ.6] — დასახელებული ტექნოლოგია**
+- **კ:** განმარტეთ SMART ტექნოლოგიის არსი.
+- **პ:** SMART — Self-Monitoring, Analysis and Reporting Technology — ვინჩესტერის მდგომარეობის შეფასებისა და შეცდომების წინასწარმეტყველების სტანდარტია. დაზიანების ალბათობის გაზრდისას ის BIOS-ს ან სისტემას შეტყობინებას უგზავნის.
 
 ---
 
-## 3. Bottom line
+### 🟦 Tier A — დასახელებული ტექნოლოგიები და მექანიზმები
 
-If betting on the 5 open questions, lock in **Tier S** plus the **ch.14 Intel-technology block** (Tier A). Comparisons + named technologies are this lecturer's fingerprint, and chapters 14–17 are rich in exactly that.
+**10. [თ.14 · კ.9] — ყველა Intel-tech კითხვა მწვანე იყო მიდტერმზე**
+- **კ:** ჩამოაყალიბეთ Intel Quiet System ტექნოლოგიის არსი.
+- **პ:** Intel Quiet System Technology არის ფრიალას ბრუნვის სიჩქარის მართვის ტექნოლოგია.
 
-Because his questions are typically **two-part**, prepare answers as *pairs*: for each Tier S/A topic, also be ready for a likely “… and describe/compare [neighboring topic]” second half (see the compound-pairing table in section 1b).
+**11. [თ.14 · კ.10] — Intel-tech ბლოკი**
+- **კ:** ჩამოაყალიბეთ Intel Fast Memory Access ტექნოლოგიის არსი.
+- **პ:** Intel Fast Memory Access ოპერატიულ მეხსიერებასთან მუშაობის ოპტიმიზაციის ფუნქციაა. ის ბრძანებების რიგითობას აანალიზებს, შეთანხმებად ბრძანებებს თანმიმდევრულად ასრულებს და წაკითხვის სიჩქარის შეზღუდვას ამცირებს.
 
-**Caveat:** the midterm covered chapters 4–6 (processors); the final covers 8–17. This transfers his *style* forward (reliable), but a second emphasized midterm would tighten the prediction further. The single strongest override is anything he explicitly stressed in lectures.
+**12. [თ.14 · კ.11] — Intel-tech ბლოკი**
+- **კ:** ჩამოაყალიბეთ Intel Clear Video ტექნოლოგიის არსი.
+- **პ:** Intel Clear Video ინტეგრირებულ გრაფიკაში ჩაშენებული ტექნოლოგიაა, რომელიც HD-DVD და Blu-Ray მხარდაჭერის ფუნქციებს მოიცავს, ვიდეოს ჩვენების ხარისხს აუმჯობესებს და ზოგ შემთხვევაში PCI Express x16 ვიდეოადაპტერის საჭიროებას ამცირებს.
+
+**13. [თ.14 · კ.12] — Intel-tech ბლოკი**
+- **კ:** ჩამოაყალიბეთ Intel High Definition Audio ტექნოლოგიის არსი.
+- **პ:** Intel High Definition Audio, იგივე HD Audio / Azalia, არის აპარატურული აუდიოკოდეკების სპეციფიკაცია. AC’97-თან შედარებით გაუმჯობესებულია ციფრული ხმის ხარისხი და გაზრდილია არხების რაოდენობა.
+
+**14. [თ.14 · კ.13] — Intel-tech ბლოკი**
+- **კ:** ჩამოაყალიბეთ Intel Turbo Memory ტექნოლოგიის არსი.
+- **პ:** Intel Turbo Memory ხშირად გამოყენებულ მონაცემებს NAND ტიპის Flash-მეხსიერებაში ინახავს. Turbo Memory მოდული mini-PCIe სლოტში ყენდება, ამცირებს ჩატვირთვის დროს და ენერგომოხმარებას.
+
+**15. [თ.14 · კ.14] — Intel-tech ბლოკი**
+- **კ:** ჩამოაყალიბეთ Intel Matrix Storage ტექნოლოგიის არსი.
+- **პ:** Intel Matrix Storage Technology არის RAID მასივებთან მუშაობის ტექნოლოგია.
+
+**16. [თ.14 · კ.8] — დასახელებული არქიტექტურული კონცეფცია**
+- **კ:** ჩამოაყალიბეთ Legacy Free არქიტექტურის არსი.
+- **პ:** Legacy Free არის არქიტექტურა Super I/O მიკროსქემისა და სტანდარტული legacy პორტების გარეშე. ასეთ სისტემებში ადრე სტანდარტულ პორტებზე მომუშავე მოწყობილობები USB-ით უკავშირდებიან კომპიუტერს.
+
+**17. [თ.14 · კ.1] — არქიტექტურის მექანიზმი**
+- **კ:** რა ფუნქციას ასრულებს FSB (DMI) სალტე?
+- **პ:** FSB აღწერილია როგორც პროცესორის გარე სალტე, რომელიც North Bridge / Memory Controller Hub-ს უკავშირდება და პროცესორს ძირითად ოპერატიულ მეხსიერებასთან და გრაფიკულ სისტემასთან აკავშირებს. DMI-ს შესახებ წყაროში საკმარისი პირდაპირი ინფორმაცია არ არის.
+
+**18. [თ.13 · კ.4] — დასახელებული სიგნალი/მექანიზმი**
+- **კ:** აღწერეთ კვების ბლოკის მმართველი სიგნალი Power Good.
+- **პ:** Power Good მიუთითებს, რომ კვება წესრიგშია. თუ გამომავალი ძაბვები ნორმაშია, კვების ბლოკი სისტემურ პლატას უგზავნის Power Good სიგნალს; დარღვევისას სიგნალი ითიშება და პროცესორი გადაიტვირთება.
+
+**19. [თ.13 · კ.5] — დასახელებული სიგნალები/მექანიზმი**
+- **კ:** აღწერეთ კვების ბლოკის მმართველი სიგნალები Power_On და +5V Stand By.
+- **პ:** Power_On სისტემური პლატიდან კვების ბლოკზე მიწოდებული სიგნალია, რომელიც პროგრამულ გამორთვას და კლავიატურით ჩართვას უზრუნველყოფს. +5V Standby მცირე სიმძლავრის კვების სიგნალია, რომელიც გამორთულ მდგომარეობაშიც მიეწოდება კომპიუტერს.
+
+**20. [თ.15 · კ.2] — დასახელებული მექანიზმი**
+- **კ:** ჩამოაყალიბეთ ზონურ-სექციური ჩაწერის არსი.
+- **პ:** Zone Bit Recording-ის მიხედვით სხვადასხვა ბილიკები სექტორების სხვადასხვა რაოდენობას შეიცავს. გარე ბილიკები უფრო გრძელია და მეტ სექტორად იყოფა. ცილინდრები იყოფა ზონებად, სადაც ერთ ზონაში ბილიკებს სექტორების ერთნაირი რაოდენობა აქვთ.
+
+**21. [თ.10 · კ.1] — მექანიზმი + ფარული შედარება**
+- **კ:** აღწერეთ მონაცემთა მიმდევრობითი და პარალელური გადაცემის პრინციპები. მოახდინეთ მათი შედარებითი ანალიზი.
+- **პ:** მიმდევრობით სალტეში ბიტები ერთი ხაზით თანმიმდევრობით გადაიცემა. პარალელური სალტე ერთდროულად რამდენიმე ხაზს იყენებს. პარალელური გადაცემა თეორიულად მეტ ბიტს გადასცემს, მაგრამ მაღალი სიხშირისას ფაზური ძვრა, ელექტრომაგნიტური ზემოქმედება და კაბელის სირთულე პრობლემას ქმნის. ამიტომ თანამედროვე ტენდენცია მიმდევრობითი ინტერფეისებისკენ მიდის.
+
+**22. [თ.12 · კ.6] — დასახელებული ტექნოლოგია**
+- **კ:** აღწერეთ USB On-The-Go (USB OTG) სტანდარტი.
+- **პ:** USB OTG USB 2.0-ის განვითარებაა და პერიფერიული მოწყობილობების ერთმანეთთან დაკავშირებას კომპიუტერის გარეშე უზრუნველყოფს, მაგალითად ციფრული ფოტოაპარატის ფოტოპრინტერთან შეერთებას.
+
+**23. [თ.17 · კ.7] — დასახელებული რეჟიმი**
+- **კ:** აღწერეთ ფერების რეჟიმი True Color.
+- **პ:** True Color მხარს უჭერს 2²⁴ = 16.7 მილიონ (ან 2³²) ფერს. თითო პიქსელი 24 ან 32 ბიტით კოდირდება; 24-ბიტიან რეჟიმში RGB ფერებზე თითოეულზე 8 ბიტი გამოიყოფა.
+
+**24. [თ.17 · კ.6] — დასახელებული რეჟიმები + შედარება**
+- **კ:** აღწერეთ ფერების რეჟიმები Hi-Color და Real Color.
+- **პ:** HiColor მხარს უჭერს 2¹⁵ = 32768 ფერს და თითო პიქსელისთვის 15 ბიტს იყენებს. Real Color მხარს უჭერს 2¹⁶ = 65536 ფერს და თითო პიქსელისთვის 16 ბიტს იყენებს; მწვანე ფერს დამატებითი ბიტი აქვს ადამიანის თვალის მგრძნობელობის გამო.
+
+**25. [თ.16 · კ.3] — დასახელებული ტექნოლოგია**
+- **კ:** აღწერეთ CD-R დისკის ტექნოლოგია.
+- **პ:** CD-R ერთჯერადი ჩაწერისთვისაა. ჩაწერისას ლაზერი ორგანული საღებავის ფენას 250–300°C-მდე აცხელებს და წვავს, რის შედეგად მონაკვეთი გაუმჭვირვალე ხდება.
+
+**26. [თ.16 · კ.4] — დასახელებული ტექნოლოგია**
+- **კ:** აღწერეთ CD-RW დისკის ტექნოლოგია.
+- **პ:** CD-RW მრავალჯერადი ჩაწერის საშუალებას იძლევა. მისი ჩამწერი ფენა პოლიკრისტალური სტრუქტურისაა, რაც ოპტიკური თვისებების მრავალჯერ შეცვლას და ინფორმაციის წაშლა-ჩაწერას უზრუნველყოფს.
+
+**27. [თ.9 · კ.11] — დასახელებული ტექნოლოგია**
+- **კ:** ჩამოაყალიბეთ DDR ტექნოლოგიის არსი.
+- **პ:** DDR ტექნოლოგიაში მონაცემები გადაიცემა სინქროსიგნალის ორივე ფრონტზე — წინა და უკანა ფრონტზე. ამიტომ ერთ ციკლში ერთის ნაცვლად ორი მონაცემი გადაიცემა, რაც სიჩქარეს ზრდის.
+
+---
+
+### 🟨 Tier B — სავარაუდო
+
+**28. [თ.9 · კ.13] — დასახელებული ტექნოლოგია**
+- **კ:** ჩამოაყალიბეთ DDR2 ტექნოლოგიის არსი.
+- **პ:** DDR2 არის DDR-ის გაზრდილი სწრაფქმედების ვერსია. ის 1.8 ვ სამუშაო ძაბვაზე მუშაობს და იყენებს 4n-prefetch სქემას, სადაც შიდა სალტე გარე სალტესთან შედარებით 4-ჯერ განიერია. ეს ამცირებს ენერგომოხმარებას, თუმცა ზრდის ლატენტურობას.
+
+**29. [თ.9 · კ.17] — დასახელებული ტექნოლოგია**
+- **კ:** ჩამოაყალიბეთ DDR3 ტექნოლოგიის არსი.
+- **პ:** DDR3 არის DDR2-ის განვითარება. მონაცემები კვლავ სინქროსიგნალის ორივე ნახევარპერიოდში გადაიცემა, მაგრამ გამოიყენება 8n-prefetch სქემა, სადაც შიდა სალტე გარე სალტეზე 8-ჯერ განიერია. სტანდარტული ძაბვაა 1.5 ვ.
+
+**30. [თ.9 · კ.20] — დასახელებული ტექნოლოგია**
+- **კ:** ჩამოაყალიბეთ DDR4 ტექნოლოგიის არსი.
+- **პ:** DDR4 არის DDR3-ის ევოლუციური განვითარება. მას აქვს გაზრდილი გამტარუნარიანობა, შემცირებული სამუშაო ძაბვა, გაზრდილი საიმედოობა, ენერგოეკონომიურობა, გაზრდილი მაქსიმალური მოცულობა და მეხსიერების კონტროლერთან კავშირის ახალი ინტერფეისი.
+
+**31. [თ.9 · კ.27] — დასახელებული ტექნოლოგია**
+- **კ:** ჩამოაყალიბეთ DDR5 ტექნოლოგიის არსი.
+- **პ:** DDR5 არის ძირითადი ოპერატიული მეხსიერების შემდეგი საფეხური. იგივე სამუშაო სიხშირის შემთხვევაში DDR5 DDR4-თან შედარებით გაორმაგებულ გამტარუნარიანობას უზრუნველყოფს, რადგან არხების / ბანკების რაოდენობა 32-მდე იზრდება.
+
+**32. [თ.9 · კ.22] — შედარება**
+- **კ:** შეადარეთ ერთმანეთს DDR3 სტანდარტის Multi-Drop Bus და DDR4 სტანდარტის Point-to-Point Bus ინტერფეისები.
+- **პ:** DDR3 იყენებს Multi-Drop Bus-ს, სადაც ერთ არხს რამდენიმე მოდული უკავშირდება, რაც წარმადობას ზღუდავს. DDR4 იყენებს Point-to-Point Bus-ს — ერთი მოდული ერთ არხზე. სლოტების პარალელური მიმართვა უფრო ეფექტურია და მოდულების დამატებისას სწრაფქმედება იზრდება.
+
+**33. [თ.9 · კ.28] — შედარება**
+- **კ:** რა განაპირობებს DDR5 მეხსიერების ენერგოეკონომიურობას DDR4 მეხსიერებასთან შედარებით?
+- **პ:** DDR5-ში იგივე სისტემური პლატის სიხშირის მხარდაჭერისთვის მიკროსქემების სიხშირე DDR4-თან შედარებით ორჯერ ნაკლებია და საბაზისო ძაბვაც დაბალია — 1.1 ვ DDR4-ის 1.2 ვ-ის ნაცვლად.
+
+**34. [თ.9 · კ.23] — შედარება**
+- **კ:** შეადარეთ ერთმანეთს DDR4 და DDR3 სტანდარტები სამუშაო ძაბვის კუთხით.
+- **პ:** DDR3-ის საბაზისო სამუშაო ძაბვაა 1.5 ვ, DDR4-ის კი 1.2 ვ. DDR4-3200-ისთვის ძაბვა შეიძლება 1.35 ვ-მდე გაიზარდოს.
+
+**35. [თ.9 · კ.24] — შედარება**
+- **კ:** შეადარეთ ერთმანეთს DDR4 და DDR3 სტანდარტები მეხსიერების მაქსიმალური მოცულობის კუთხით.
+- **პ:** DDR3-ის მაქსიმალური მოცულობა 128 გბ-ია, ხოლო DDR4-ის — 512 გბ, ანუ ოთხჯერ მეტი.
+
+**36. [თ.9 · კ.26] — შედარება**
+- **კ:** შეადარეთ ერთმანეთს DDR4 და DDR3 მეხსიერების მოდულები კონსტრუქციული კუთხით.
+- **პ:** DDR3-ს აქვს 240 კონტაქტი, DDR4-ს — 288. განსხვავებულია გასაღების მდებარეობა, DDR4 მოდულები უფრო სქელია, მეტი სასიგნალო ფენა აქვთ და მომრგვალებული კუთხეები გააჩნიათ.
+
+**37. [თ.9 · კ.25] — მექანიზმი**
+- **კ:** რა განაპირობებს DDR4 მეხსიერების ენერგოეკონომიურობას DDR3 მეხსიერებასთან შედარებით?
+- **პ:** DDR4-ის ენერგოეკონომიურობას განაპირობებს 1.2 ვ საბაზისო ძაბვა, გარე კვების გარდამქმნელი და Pseudo-Open Drain ინტერფეისი, რომელიც დენის გაჟონვას ამცირებს. ენერგომოხმარება DDR3-თან შედარებით დაახლოებით 30%-ით მცირდება.
+
+**38. [თ.10 · კ.4] — მექანიზმი**
+- **კ:** აღწერეთ მონაცემების დიფერენციალური გადაცემის პრინციპი.
+- **პ:** დიფერენციალურ სალტეში თითო სიგნალისთვის ორი გამტარი გამოიყენება: ერთით პირდაპირი სიგნალი, მეორით — ინვერსიული. ხმაური ორივეზე ერთნაირად მოქმედებს, მიმღები კი რეალურ სიგნალს ამ ორი სიგნალის სხვაობით აღადგენს.
+
+**39. [თ.10 · კ.3] — მექანიზმი**
+- **კ:** აღწერეთ მონაცემების ერთგამტარიანი გადაცემის პრინციპი.
+- **პ:** ერთგამტარიან / Single-ended სალტეში ყოველი სიგნალი ორი გამტარით ვრცელდება: ერთით რეალური ძაბვა გადაიცემა, მეორე კი დამიწებულია. ასეთი სალტე იაფია, მაგრამ დაბალი შეფერხებამედეგობა და შეზღუდული სიგრძე აქვს.
+
+**40. [თ.10 · კ.13] — მექანიზმი**
+- **კ:** აღწერეთ PCI Express სალტეში გამოყენებული კოდირების მეთოდები.
+- **პ:** PCI Express 1.0 და 2.0 იყენებს 8b/10b კოდირებას; PCI Express 3.0, 4.0 და 5.0 — 128b/130b კოდირებას; PCI Express 6.0 და 7.0 — 242b/256b კოდირებას.
+
+**41. [თ.10 · კ.10] — დასახელებული სალტე**
+- **კ:** ჩამოაყალიბეთ PCI Express სალტის დამახასიათებელი თვისებები.
+- **პ:** PCI Express თანამედროვე უნივერსალური მიმდევრობითი ინტერფეისია. იგი დუპლექსურ რეჟიმში მუშაობს, იყენებს ტრასებს / ზოლებს და შეიძლება იყოს ×1, ×2, ×4, ×8 ან ×16. მისი თვისებებია PCI-სთან შეთავსება, ჩაშენებული სინქრონიზაცია, მცირე მოლოდინის დრო, ცხელი კომუტაცია / შეცვლა და კვების მართვა.
+
+**42. [თ.10 · კ.2] — კონცეფცია**
+- **კ:** ჩამოაყალიბეთ თანამედროვე ტენდენციები ინტერფეისების განვითარების სფეროში.
+- **პ:** თანამედროვე ტენდენციაა პარალელური სალტეების ჩანაცვლება მაღალსიჩქარიანი მიმდევრობითი სალტეებით, რადგან ისინი ნაკლებ გამტარს იყენებენ, იაფია, ნაკლებ დაბრკოლებას ქმნიან და გიგაჰერცულ სიხშირეებზე მუშაობა შეუძლიათ.
+
+**43. [თ.10 · კ.12] — კონცეფცია**
+- **კ:** ჩამოაყალიბეთ შეთავსებადობის პრინციპი სხვადასხვა სტანდარტის PCI Express სალტეებსა და პლატა-ადაპტერებს შორის.
+- **პ:** PCI Express მოწყობილობა იმუშავებს ნებისმიერ სლოტში, თუ სლოტს იგივე ან მეტი რაოდენობის ტრასა აქვს. ვერსიებს შორისაც არსებობს შეთავსებადობა: უფრო ახალი და ძველი სლოტები / ადაპტერები ერთად მუშაობენ, მაგრამ სიჩქარე დაბალი სტანდარტის მიხედვით განისაზღვრება.
+
+**44. [თ.8 · კ.7] — შედარება/მექანიზმი**
+- **კ:** ჩამოაყალიბეთ დაბალი და მაღალი დონის დრაივერების არსი, მოახდინეთ მათი შედარებითი ანალიზი.
+- **პ:** BIOS-ის დრაივერები დაბალი დონის დრაივერებია, რადგან მოწყობილობებს მხოლოდ მინიმალურ რეჟიმში ამუშავებენ. ოპერაციული სისტემის ჩატვირთვის შემდეგ ისინი მუშაობას წყვეტენ და იტვირთება მაღალი დონის დრაივერები, რომლებიც მოწყობილობების სრულფასოვან მუშაობას უზრუნველყოფენ.
+
+**45. [თ.8 · კ.5] — მექანიზმი**
+- **კ:** აღწერეთ ოპერატიულ მეხსიერებაში BIOS-ის ჩატვირთვის პროცესი. რა თანმიმდევრობით სრულდება BIOS-ის ქვეპროგრამები?
+- **პ:** კომპიუტერის ჩართვისთანავე BIOS ავტომატურად იტვირთება მუდმივი მეხსიერებიდან ოპერატიულ მეხსიერებაში. შემდეგ სრულდება POST, საჭიროების შემთხვევაში BIOS Setup, შემდეგ დაბალი დონის დრაივერები და ბოლოს ოპერაციული სისტემის ჩამტვირთავი.
+
+**46. [თ.16 · კ.2] — მექანიზმი**
+- **კ:** აღწერეთ კომპაქტ-დისკებიდან ინფორმაციის წაკითხვის პროცესი.
+- **პ:** ინფორმაცია იკითხება დისკიდან არეკლილი დაბალი სიმძლავრის ლაზერული სხივის რხევების რეგისტრაციით. ზედაპირი სხივს კარგად ირეკლავს, ღრმულიდან კი არეკვლა თითქმის არ ხდება. მიღებული ორობითი თანრიგები ხმას ან კომპიუტერულ მონაცემებს შეესაბამება.
+
+**47. [თ.16 · კ.12] — დასახელებული ფორმატი**
+- **კ:** განმარტეთ უნივერსალური დისკური ფორმატის (UDF) არსი.
+- **პ:** UDF — Universal Disk Format — პაკეტური ჩაწერისას გამოიყენება და დისკზე ფაილების ჩაწერა-წაშლას ვინჩესტერის ან Flash-დამგროვებლის მსგავსად უზრუნველყოფს.
+
+**48. [თ.15 · კ.14] — დასახელებული ფაილური სისტემები + შედარება**
+- **კ:** აღწერეთ ფაილური სისტემები FAT 32 და exFAT.
+- **პ:** FAT32 არის 32-თანრიგა დამისამართების ფაილური სისტემა, რომლის ტომის მაქსიმალური მოცულობა 2 ტბ-ია. exFAT Microsoft-მა 2006 წელს შექმნა FAT32-ის გაუმჯობესებულ ალტერნატივად; ის ფლეშ-დამგროვებლებისთვისაა განკუთვნილი და 4 გბ ფაილის შეზღუდვა არ აქვს.
+
+**49. [თ.15 · კ.15] — დასახელებული ფაილური სისტემა**
+- **კ:** აღწერეთ ფაილური სისტემა NTFS.
+- **პ:** NTFS Microsoft-ის ოპერაციული სისტემების სტანდარტული ფაილური სისტემაა. ის უზრუნველყოფს წვდომის კონტროლს, კვოტებს, დაშიფვრას, კომპრესიას, მეტამონაცემების შენახვას, საიმედოობას და დისკური სივრცის ეფექტურ გამოყენებას.
+
+**50. [თ.12 · კ.7] — დასახელებული ტექნოლოგია**
+- **კ:** აღწერეთ USB Wireless სტანდარტი.
+- **პ:** USB Wireless 2005 წელს დამუშავდა და USB მოწყობილობებს შორის უგამტარო კავშირს უზრუნველყოფს. 3 მეტრამდე სიჩქარეა 480 მბიტ/წმ, 10 მეტრამდე — 110 მბიტ/წმ.
+
+**51. [თ.14 · კ.5] — დასახელებული კომპონენტი**
+- **კ:** ჩამოაყალიბეთ I/O Controller Hub მიკროსქემის დანიშნულება.
+- **პ:** I/O Controller Hub არის South Bridge-ის ახალი დასახელება Hub-არქიტექტურაში. მას უკავშირდება USB, ATA და სხვა შეტანა-გამოტანის ინტერფეისები; LPC სალტით კი Firmware Hub / Flash ROM BIOS და Super I/O.
+
+**52. [თ.11 · კ.5] — დასახელებულ-ტექ მომიჯნავე**
+- **კ:** აღწერეთ SATA ინტერფეისის სტანდარტები.
+- **პ:** ძირითადი სტანდარტებია SATA-1 — 1500 მჰც, 150 მბ/წმ, 2002; SATA-2 — 3000 მჰც, 300 მბ/წმ, 2005; SATA-3 — 6000 მჰც, 600 მბ/წმ, 2007.
+
+**53. [თ.11 · კ.7] — მექანიზმი**
+- **კ:** აღწერეთ SATA ინტერფეისის ორგანიზაციული სტრუქტურა.
+- **პ:** SATA-ს აქვს ოთხდონიანი სტრუქტურა: ფიზიკური, არხული, სატრანსპორტო და გამოყენებითი დონე. ეს არქიტექტურა ცალკეული დონეების შეცვლის საშუალებას იძლევა სხვა დონეების შეცვლის გარეშე.
+
+**54. [თ.11 · კ.8] — მექანიზმი**
+- **კ:** აღწერეთ SATA ინტერფეისის ფიზიკური დონე.
+- **პ:** ფიზიკური დონე პარალელურ კოდში მიღებულ მონაცემებს ბიტების თანმიმდევრობად გარდაქმნის, კოდირებს და გადასცემს სალტეზე; ასევე მიღებულ მიმდევრობით კოდს პარალელურ კოდად გარდაქმნის.
+
+**55. [თ.11 · კ.10] — მექანიზმი**
+- **კ:** აღწერეთ SATA ინტერფეისის არხული დონე.
+- **პ:** არხული დონე ასრულებს მონაცემთა გადაცემის არბიტრაჟს, შეცდომების აღმოჩენისა და კორექციის მექანიზმებს, აკონტროლებს გადაცემას და სატრანსპორტო დონეს სწორად გადაცემის შესახებ ატყობინებს.
+
+**56. [თ.11 · კ.11] — მექანიზმი**
+- **კ:** ჩამოაყალიბეთ SATA ინტერფეისით მონაცემების გადაცემისას გამოყენებული შეცდომების აღმოჩენის და კორექციის მეთოდები.
+- **პ:** SATA იყენებს 8b/10b კოდირებას, სადაც 8 ბიტს ემატება 2 ბიტი და მიიღება 10-ბიტიანი სიტყვა. აკრძალული კომბინაციის მიღება შეცდომაზე მიუთითებს. დამატებით გამოიყენება CRC კოდირება.
+
+**57. [თ.12 · კ.8] — დასახელებულ-ტექ მომიჯნავე**
+- **კ:** აღწერეთ USB 3.0 სტანდარტი.
+- **პ:** USB 3.0 2008 წელს დამუშავდა. მაქსიმალური სიჩქარეა 4.8 გბიტ/წმ. USB 2.0-თან შედარებით გაზრდილია დენი 500 მა-დან 900 მა-მდე, ხოლო კაბელს დამატებით ორი გრეხილი წყვილი აქვს.
+
+**58. [თ.12 · კ.4] — მექანიზმი**
+- **კ:** ჩამოაყალიბეთ USB 2.0 სტანდარტით გათვალისწინებული მონაცემთა გადაცემის რეჟიმები.
+- **პ:** USB 2.0-ში არის Low-speed — 0.01–1.5 მბიტ/წმ; Full-speed — 0.5–12 მბიტ/წმ; Hi-speed — 25–480 მბიტ/წმ.
+
+**59. [თ.9 · კ.16] — კონცეფცია**
+- **კ:** ჩამოაყალიბეთ მეხსიერების ტაიმინგის არსი.
+- **პ:** ტაიმინგი არის რიცხვების კრებული, რომელიც RAM-ის მუშაობისას წარმოქმნილ დაყოვნებებს აღწერს: CAS Latency, Row to CAS Delay, Row Precharge Time და Tras. ტაიმინგები გამოიყენება ლატენტურობისა და წარმადობის შესაფასებლად.
+
+**60. [თ.9 · კ.21] — მექანიზმი**
+- **კ:** ჩამოაყალიბეთ DDR4 სტანდარტით გათვალისწინებული შეცდომების აღმოჩენის და კორექციის მეთოდები.
+- **პ:** DDR4-ში მისამართებისა და ბრძანებებისთვის გამოიყენება ლუწობაზე კონტროლი, ხოლო მეხსიერებაში ჩასაწერი მონაცემებისთვის — CRC კოდები. ასევე იწარმოება ECC კოდების მხარდამჭერი DDR4 მოდულები.
+
+---
+
+### ⬜ Tier C — ნაკლებად ხაზგასმული (განმარტება/სპეციფიკაცია)
+
+**61. [თ.8 · კ.1] — „დანიშნულება" (ლურჯი მიდტერმზე)**
+- **კ:** ჩამოაყალიბეთ მუდმივი მეხსიერების დანიშნულება და დამახასიათებელი თვისებები.
+- **პ:** მეხსიერების დანიშნულებაა კომპიუტერში გამოყენებული პროგრამების, მონაცემებისა და მიღებული შედეგების შენახვა. მუდმივი მეხსიერება კვებისგან დამოუკიდებელია: კომპიუტერის გამორთვის შემდეგაც ინარჩუნებს ინფორმაციას.
+
+**62. [თ.8 · კ.2] — პირდაპირი ანალოგი ლურჯი მიდტერმის Q1+Q2-ის**
+- **კ:** რაში მდგომარეობს პროგრამა BIOS-ის დანიშნულება? დაასახელეთ BIOS-ის ძირითადი მწარმოებელი ფირმები.
+- **პ:** BIOS — Basic Input-Output System — სისტემურ პლატაზე მდებარე მუდმივი მეხსიერების მიკროსქემაში იწერება და კონკრეტული სისტემური პლატის საბაზო პროგრამების კრებულია. ის შეიცავს სასტარტო პროგრამებს, რომლებიც აუცილებელია სისტემის საწყისი ფუნქციონირებისთვის. ძირითადი მწარმოებლებია: American Megatrends Inc. (AMI), Award Software, Phoenix Technologies და Microid Research.
+
+**63. [თ.15 · კ.1] — ⬆ ორნაწილიანი კითხვა (ამიტომ ამაღლებულია)**
+- **კ:** ჩამოაყალიბეთ ვინჩესტერის სექტორის, ბილიკის, ცილინდრის არსი. ჩამოთვალეთ ვინჩესტერის ძირითადი პარამეტრები.
+- **პ:** დისკი დაყოფილია ბილიკებად და სექტორებად. სექტორი მონაცემთა მინიმალური მისამართვადი უბანია; ძველ HDD-ებში 512 ბაიტი იყო, თანამედროვეებში 4096 ბაიტამდე გაიზარდა. ერთნაირ რადიუსზე მდებარე ბილიკების ერთობლიობას ცილინდრი ეწოდება. ძირითადი პარამეტრებია ტევადობა და სწრაფქმედება.
+
+**64. [თ.13 · კ.1] — „დანიშნულება"**
+- **კ:** ჩამოაყალიბეთ კვების ბლოკის დანიშნულება.
+- **პ:** კვების ბლოკი იღებს ქსელიდან 220/110 ვ ცვლად ძაბვას და გარდაქმნის მას მუდმივ ძაბვებად: +3.3 ვ, ±5 ვ და ±12 ვ.
+
+**65. [თ.15 · კ.5] — „დანიშნულება"**
+- **კ:** ჩამოაყალიბეთ ვინჩესტერის Cache-მეხსიერების დანიშნულება.
+- **პ:** HDD Cache არის კონტროლერში არსებული მეხსიერება, რომელიც წინასწარ წაკითხულ სავარაუდოდ საჭირო მონაცემებს ინახავს და მონაცემთა გადაცემის სიჩქარეს ზრდის.
+
+**66. [თ.12 · კ.1] — მარტივი ჩამონათვალი**
+- **კ:** ჩამოაყალიბეთ USB პორტის დადებითი თვისებები.
+- **პ:** USB უზრუნველყოფს Plug&Play რეჟიმს, მოწყობილობის ავტომატურ აღმოჩენას და დრაივერის დაყენებას; მოწყობილობის შეერთება / გამორთვა შესაძლებელია კომპიუტერის გამორთვის გარეშე; USB კაბელით დაბალი სიმძლავრის მოწყობილობების კვებაც ხდება; შესაძლებელია 127-მდე მოწყობილობის შეერთება.
+
+**67. [თ.9 · კ.3] — მარტივი აღწერა**
+- **კ:** აღწერეთ ოპერატიული მეხსიერების სტრუქტურა.
+- **პ:** მეხსიერების მიკროსქემა შედგება მატრიცებისგან. თითოეულ მატრიცას აქვს შეტანა/გამოტანის ხაზი, რომლითაც 1 ბიტის წაკითხვა ან ჩაწერაა შესაძლებელი. 4-, 8- და 16-მატრიციანი მიკროსქემების პარალელური ჩართვით ფორმირდება 64-თანრიგა ხაზი. ტევადობა განისაზღვრება სამისამართო სივრცის სიღრმისა და მატრიცების რაოდენობის ნამრავლით.
+
+**68. [თ.9 · კ.4] — მარტივი აღწერა**
+- **კ:** აღწერეთ რეგისტრული მეხსიერება.
+- **პ:** რეგისტრული მეხსიერება პროცესორის განუყოფელი ნაწილია და ზემაღალი სიჩქარით მუშაობს. რეგისტრი ორობითი რიცხვების დროებითი შენახვის ციფრული სქემაა. რეგისტრებამდე მიღწევის დრო Cache-მეხსიერებასთან შედარებით ნაკლებია, თუმცა მათი მოცულობა ძალიან მცირეა.
+
+**69. [თ.9 · კ.2] — მარტივი აღწერა**
+- **კ:** როგორი თანმიმდევრობით იტვირთება პროგრამები ოპერატიულ მეხსიერებაში?
+- **პ:** RAM-ში თანმიმდევრობით იტვირთება: POST, დაბალი დონის დრაივერები, ოპერაციული სისტემა დამგროვებლიდან, ოპერაციული სისტემა მაღალი დონის დრაივერებით, მომხმარებლის პროგრამები და პროგრამებში მიღებული შედეგები.
+
+**70. [თ.11 · კ.2] — სპეციფიკაციის ჩამონათვალი**
+- **კ:** განმარტეთ ATA ინტერფეისის სპეციფიკაციით განსაზღვრული ობიექტები.
+- **პ:** ATA განსაზღვრავს ჰოსტს — სისტემურ პლატაზე არსებულ ATA კონტროლერს; წამყვან მოწყობილობას — Master / Device 0; და დაქვემდებარებულ მოწყობილობას — Slave / Device 1.
+
+**71. [თ.17 · კ.3] — მარტივი განმარტება**
+- **კ:** აღწერეთ მონიტორის მახასიათებელი — Resolution.
+- **პ:** Resolution / გარჩევადობა არის ჰორიზონტალური და ვერტიკალური პიქსელების რაოდენობა, რომლის ასახვაც მონიტორს შეუძლია. მაგალითად, 1920×1080 ნიშნავს 1920 პიქსელს ჰორიზონტალურად და 1080-ს ვერტიკალურად.
+
+**72. [თ.17 · კ.1] — მარტივი აღწერა (წყვილდება კ.2-თან)**
+- **კ:** აღწერეთ მონიტორის ფუნქციონირების ტექსტური (alphanumeric) რეჟიმი.
+- **პ:** ტექსტურ რეჟიმში ეკრანი სტრიქონებად და სვეტებად იყოფა. თითოეულ უჯრედში შეიძლება აისახოს ერთი სიმბოლო სტანდარტული სიმბოლოების კრებულიდან. ბრძანებითი სტრიქონი ტექსტური რეჟიმის მაგალითია.
+
+**73. [თ.17 · კ.2] — მარტივი აღწერა (წყვილდება კ.1-თან)**
+- **კ:** აღწერეთ მონიტორის ფუნქციონირების გრაფიკული (all pixels addressable) რეჟიმი.
+- **პ:** გრაფიკულ რეჟიმში ეკრანის თითოეული პიქსელი ცალ-ცალკე იმართება, რაც ნებისმიერი ფორმის, ზომისა და ფერის გამოსახულების წარმოდგენას იძლევა. ეს რეჟიმი კომფორტულია, მაგრამ მეტ რესურსს მოითხოვს.
+
+**74. [თ.17 · კ.5] — ვიწრო კონცეფცია**
+- **კ:** რამ განაპირობა VGA სტანდარტში ანალოგური სიგნალების გამოყენება?
+- **პ:** VGA ანალოგურია, რადგან წლების განმავლობაში ფართოდ გამოიყენებოდა ანალოგური CRT მონიტორები. წითელი, მწვანე და ლურჯი ფერების გადასაცემად თითო გამტარი გამოიყენება.
+
+**75. [თ.17 · კ.8] — შედარება, მაგრამ ინტერფეის-სპეც დატვირთული**
+- **კ:** აღწერეთ ციფრული გრაფიკული ინტერფეისები VGA, DVI და HDMI.
+- **პ:** VGA ანალოგური ინტერფეისია და მაღალი გარჩევადობისას გამოსახულებას ამახინჯებს. DVI ციფრული ინტერფეისია LCD მონიტორებისთვის და 4K-მდე გარჩევადობებს უჭერს მხარს. HDMI DVI-ის განვითარებაა და ერთი კაბელით მაღალი გარჩევადობის ციფრულ ვიდეოსა და მრავალარხიან ციფრულ აუდიოს გადასცემს, 8K-მდე მხარდაჭერით.
+
+**76. [თ.8 · კ.4] — ჩამონათვალი**
+- **კ:** ჩამოთვალეთ BIOS-ის ქვეპროგრამები. ჩამოაყალიბეთ თითოეული მათგანის დანიშნულება.
+- **პ:** BIOS-ის ქვეპროგრამებია: POST — კომპიუტერის ძირითადი კომპონენტების ტესტირება; BIOS Setup — BIOS-ის პარამეტრების დაყენება; დაბალი დონის აპარატურული დრაივერები — მოწყობილობების მინიმალურ რეჟიმში ამუშავება; ოპერაციული სისტემის ჩამტვირთავი — ჩამტვირთავი სექტორის პოვნა და OS-ის ჩატვირთვა.
+
+**77. [თ.8 · კ.6] — ჩამონათვალი**
+- **კ:** რა შედეგების მიღებაა შესაძლებელი POST პროცედურის შესრულებისას?
+- **პ:** POST-ის შედეგად შეიძლება: შეცდომა არ აღმოჩნდეს; აღმოჩნდეს არაფატალური შეცდომა და მომხმარებელს მუშაობის გაგრძელება შესთავაზოს; აღმოჩნდეს ფატალური შეცდომა; ან ეკრანი შავი დარჩეს, რაც შეიძლება უკავშირდებოდეს სისტემურ პლატას, პროცესორს, RAM-ს ან ვიდეოპლატას.
+
+**78. [თ.8 · კ.9] — ჩამონათვალი/შედარება (წყვილდება კ.1-თან)**
+- **კ:** ჩამოთვალეთ მუდმივი მეხსიერების მიკროსქემების ტიპები და მოახდინეთ მათი შედარებითი ანალიზი.
+- **პ:** ROM იპროგრამება დამზადებისას და აღარ იცვლება; PROM იპროგრამება დამზადების შემდეგ ერთჯერადად; EPROM მრავალჯერ იწერება, მაგრამ იშლება ულტრაიისფერი ან რენტგენის სხივებით; EEPROM / Flash ROM თანამედროვე სტანდარტია, რომლის წაშლა და განახლება პროგრამულად შეიძლება.
+
+**79. [თ.8 · კ.3] — ვიწრო სპეციფიკაცია**
+- **კ:** ფიზიკურად სად იწერება CMOS Setup და როგორ ხორციელდება მისი კვება კომპიუტერის გამორთულ მდგომარეობაში ყოფნის დროს?
+- **პ:** CMOS Setup იწერება სისტემური პლატის ჩიპსეტის South Bridge / IOCH მიკროსქემაში არსებულ CMOS მეხსიერებაში. ეს მეხსიერება კვებაზე დამოკიდებულია და კომპიუტერის გამორთვისას სისტემურ პლატაზე განთავსებული 3-ვოლტიანი ბატარეით იკვებება.
+
+**80. [თ.13 · კ.6] — სტანდარტის აღწერა**
+- **კ:** აღწერეთ კვების ბლოკის ATX სტანდარტი.
+- **პ:** ATX სტანდარტი Intel-მა 1995 წელს შემოიტანა და თანამედროვე კომპიუტერებისთვის დე-ფაქტო სტანდარტია. ის გამოიმუშავებს +3.3 ვ ძაბვას, Power_On და +5V Standby სიგნალებს, აუმჯობესებს გაგრილებას და კომპონენტების განლაგებას.
+
+**81. [თ.16 · კ.11] — ჩამონათვალი**
+- **კ:** აღწერეთ კომპაქტ-დისკებზე ჩაწერის მეთოდები.
+- **პ:** Disk-At-Once — ჩაწერა ერთ სესიაში ლაზერის გამორთვის გარეშე; Track-At-Once — რამდენიმე სესიის ჩაწერა დისკის შევსებამდე; პაკეტური ჩაწერა — UDF-ით ფაილების წაშლა / ჩაწერა HDD-სა და Flash-ის მსგავსად.
+
+**82. [თ.15 · კ.7] — ჩამონათვალი (კონცეფცია მაღლა დგას, ჩამონათვალი დაბლა)**
+- **კ:** ვინჩესტერის რომელ პარამეტრებს აანალიზებს SMART ტექნოლოგია?
+- **პ:** SMART აანალიზებს თავაკის დაშორებას დისკის ზედაპირიდან, HDD-სა და Cache-ს შორის გადაცემის სიჩქარეს, bad სექტორების რაოდენობას, ბრუნვების რაოდენობას, თავაკების გადაადგილებებს, ნომინალურ სიჩქარეზე დატრიალების დროს, მოძებნის შეფერხებებს და განმეორებითი დაკალიბრებების რაოდენობას.
+
+**83. [თ.15 · კ.12] — ვიწრო**
+- **კ:** ჩამოაყალიბეთ ვინჩესტერის დაბალი დონის დაფორმატების არსი.
+- **პ:** დაბალი დონის დაფორმატებისას დისკზე ფორმირდება ბილიკები, სექტორები და მათ შორის ინტერვალები. ფირმა-დამამზადებელი ასრულებს და მომხმარებლისთვის მიუწვდომელია.
+
+**84. [თ.15 · კ.13] — ვიწრო**
+- **კ:** ჩამოაყალიბეთ ვინჩესტერის განყოფილებებად დაყოფის პროცესის ეტაპები.
+- **პ:** განყოფილებებად დაყოფისას პირველ სექტორში იწერება ჩატვირთვისთვის საჭირო პროგრამა და Partition Table. ამ სექტორს Master Boot Record / MBR ეწოდება. Windows-ში აუცილებელია პირველადი განყოფილება, დარჩენილი სივრცე კი შეიძლება ლოგიკურ დისკებად დაიყოს.
+
+**85. [თ.15 · კ.16] — ვიწრო**
+- **კ:** ჩამოაყალიბეთ ვინჩესტერის მაღალი დონის (ლოგიკური) დაფორმატების არსი.
+- **პ:** მაღალი დონის დაფორმატებას მომხმარებელი ასრულებს. ამ დროს ოპერაციული სისტემა ქმნის ფაილებთან და მონაცემებთან სამუშაო სტრუქტურებს და მიეთითება ფაილური სისტემის ტიპი. მონაცემები იშლება.
+
+**86. [თ.15 · კ.8] — ვიწრო კომპონენტი**
+- **კ:** განმარტეთ ვინჩესტერის რეცირკულაციის ფილტრის დანიშნულება.
+- **პ:** რეცირკულაციის ფილტრი აშორებს დისკის მექანიკური ნაწილების მუშაობის შედეგად წარმოქმნილ ნაწილაკებს.
+
+**87. [თ.15 · კ.9] — ვიწრო კომპონენტი**
+- **კ:** განმარტეთ ვინჩესტერის ბარომეტრული ფილტრის დანიშნულება.
+- **პ:** ბარომეტრული ფილტრი დისკურ მოწყობილობასა და გარე სამყაროს შორის წნევას ათანაბრებს და მიკროფილტრით დისკებსა და თავაკებს მტვრისგან იცავს.
+
+**88. [თ.15 · კ.10] — ვიწრო კონცეფცია**
+- **კ:** ჩამოაყალიბეთ, რა პრობლემებს ქმნის ვინჩესტერისთვის არახელსაყრელი ტემპერატურული რეჟიმი.
+- **პ:** მაღალი ტემპერატურა ამცირებს HDD-ის მუშაობის ვადას. თბილ ჰაერს ნაკლები სიმჭიდროვე აქვს, რის გამოც თავაკსა და დისკს შორის საჰაერო ბალიში მცირდება და შეიძლება დისკის ზედაპირი ან თავაკი დაზიანდეს.
+
+**89. [თ.9 · კ.7] — ვიწრო სპეციფიკაცია**
+- **კ:** რა უარყოფითი თვისებები გააჩნია DIP მიკროსქემების მასივს?
+- **პ:** DIP მიკროსქემების მასივი სისტემურ პლატაზე დიდ ადგილს იკავებდა, დაზიანებული მიკროსქემის პოვნა და შეცვლა კი რთული და შრომატევადი იყო.
+
+---
+
+### 🟥 Tier D — ყველაზე დაბალი (გამოთვლები, პინ-აუტები, სპეც-ტრივია)
+
+**90. [თ.13 · კ.2] — სპეც ჩამონათვალი**
+- **კ:** აღწერეთ კვების ბლოკის დადებითი ძაბვები.
+- **პ:** +3.3 ვ გამოიყენება ჩიპსეტებისთვის, მეხსიერების მოდულებისთვის და ადაპტერებისთვის; +5 ვ — დისკური მოწყობილობების ლოგიკური სქემებისა და ადაპტერებისთვის; +12 ვ — ძრავებისა და მაღალი სიმძლავრის ძაბვის რეგულატორებისთვის.
+
+**91. [თ.13 · კ.8] — პინ-აუტი**
+- **კ:** აღწერეთ ATX სტანდარტის კვების ბლოკის სისტემური პლატის 20-კონტაქტიანი გასართი.
+- **პ:** ATX-ში გამოიყენება ერთი 20-კონტაქტიანი არასიმეტრიული გასართი, რომელიც არასწორ შეერთებას გამორიცხავს. კონტაქტებში შედის +3.3 ვ, +5 ვ, +12 ვ, -12 ვ, -5 ვ, მიწა, Power_On, Power Good და +5V Standby.
+
+**92. [თ.13 · კ.12] — პინ-აუტი**
+- **კ:** აღწერეთ ATX სტანდარტის კვების ბლოკის სისტემური პლატის 24-კონტაქტიანი გასართი.
+- **პ:** განახლებულ ATX სტანდარტში 20-კონტაქტიანი გასართი 24-კონტაქტიანმა შეცვალა. დამატებულია ოთხი კონტაქტი: +3.3 ვ, +5 ვ, +12 ვ და მიწა.
+
+**93. [თ.13 · კ.9] — პინ-აუტი**
+- **კ:** აღწერეთ კვების ბლოკის ATA გასართი დისკური მოწყობილობებისთვის.
+- **პ:** ATA კვების გასართი 4-კონტაქტიანია: 1 — +12 ვ, ყვითელი; 2 — მიწა, შავი; 3 — მიწა, შავი; 4 — +5 ვ, წითელი.
+
+**94. [თ.13 · კ.10] — პინ-აუტი**
+- **კ:** აღწერეთ კვების ბლოკის SATA გასართი დისკური მოწყობილობებისთვის.
+- **პ:** SATA კვების გასართი 15-კონტაქტიანია და ითვალისწინებს +3.3 ვ, +5 ვ და +12 ვ ძაბვებს. თუმცა ბევრი კვების ბლოკი +3.3 ვ-ს SATA გასართზე არ აწვდის, რადგან დამგროვებლების უმეტესობა მას არ იყენებს.
+
+**95. [თ.13 · კ.13] — პინ-აუტი**
+- **კ:** ჩამოაყალიბეთ, როდის გამოიყენება 4-კონტაქტიანი ATX 12V გასართი. აღწერეთ მისი კონტაქტები.
+- **პ:** 4-კონტაქტიანი ATX12V გამოიყენება პროცესორის კვებისთვის. მას აქვს ორი +12 ვ და ორი მიწა; თითო +12 ვ ხაზის დატვირთვა 6–8 ა-ს შეადგენს. მისი შეერთება აუცილებელია.
+
+**96. [თ.13 · კ.14] — პინ-აუტი**
+- **კ:** აღწერეთ 6-კონტაქტიანი გასართი ATX 12V.
+- **პ:** 6-კონტაქტიანი გასართი გამოიყენება ვიდეოადაპტერის დამატებითი კვებისთვის და პირდაპირ კვების ბლოკიდან აწვდის +12 ვ ძაბვას. მას აქვს სამი +12 ვ და სამი მიწა.
+
+**97. [თ.13 · კ.15] — პინ-აუტი**
+- **კ:** აღწერეთ 8-კონტაქტიანი გასართი ATX 12V.
+- **პ:** 8-კონტაქტიანი ATX12V თავდაპირველად სერვერებისთვის იყო განკუთვნილი, მაგრამ მძლავრი პროცესორების გამო პერსონალურ კომპიუტერებშიც გავრცელდა. ის შეიცავს ოთხ +12 ვ ხაზს და ოთხ მიწას.
+
+**98. [თ.13 · კ.18] — სპეციფიკაცია**
+- **კ:** აღწერეთ ვიდეოადაპტერების კვებაში ჩართვის ვარიანტები.
+- **პ:** ვიდეოადაპტერი შეიძლება იკვებებოდეს PCI Express სლოტიდან ან დამატებით 6- / 8-კონტაქტიანი PCI Express / ATX12V გასართით უშუალოდ კვების ბლოკიდან. შესაძლებელია Y-ტიპის ადაპტერიც, მაგრამ საჭიროა დენის ძალისა და კვების ბლოკის სიმძლავრის წინასწარი შემოწმება.
+
+**99. [თ.12 · კ.5] — პინ-აუტი**
+- **კ:** აღწერეთ USB 2.0 გასართები და მათი კონტაქტები.
+- **პ:** USB 2.0-ს აქვს A, B, Mini-A, Mini-B, Micro-A და Micro-B გასართები. A/B კონტაქტებია: 1 — VCC, 2 — მონაცემები (-), 3 — მონაცემები (+), 4 — საერთო, გარსი — დაცვა. Mini/Micro ვერსიებში ემატება იდენტიფიკატორის კონტაქტი.
+
+**100. [თ.12 · კ.10] — პინ-აუტი**
+- **კ:** აღწერეთ USB 3.0 გასართების კონტაქტები.
+- **პ:** A ტიპის USB 3.0 გასართში არის VCC, D-, D+, GND, StdA_SSTX-, StdA_SSTX+, GND_DRAIN, StdA_SSRX-, StdA_SSRX+ და გარსი. ახალი კონტაქტები SuperSpeed გადაცემისა და მიღებისთვის გამოიყენება.
+
+**101. [თ.11 · კ.13] — პინ-აუტი**
+- **კ:** აღწერეთ SATA ინტერფეისის მონაცემთა კაბელის სტრუქტურა და კონტაქტები.
+- **პ:** SATA მონაცემთა კაბელი 7-კონტაქტიანია: S1 — საერთო, S2 — A+ Host Transmit+, S3 — A- Host Transmit-, S4 — საერთო, S5 — B- Host Receive-, S6 — B+ Host Receive+, S7 — საერთო.
+
+**102. [თ.9 · კ.31] — გამოთვლა**
+- **კ:** რა მინიმალური სიხშირე უნდა გააჩნდეს DDR2 სტანდარტის მეხსიერების უჯრედებს 800 მჰც სიხშირის სისტემური პლატის მხარდაჭერისთვის?
+- **პ:** DDR2-800-ში შიდა სალტის სიხშირეა 200 მჰც, ამიტომ მინიმალური სიხშირე არის 200 მჰც.
+
+**103. [თ.9 · კ.32] — გამოთვლა**
+- **კ:** რა მინიმალური სიხშირე უნდა გააჩნდეს DDR3 სტანდარტის მეხსიერების უჯრედებს 1066 მჰც სიხშირის სისტემური პლატის მხარდაჭერისთვის?
+- **პ:** DDR3-1066-ში შიდა სალტის სიხშირეა 133 მჰც, ამიტომ მინიმალური სიხშირე არის 133 მჰც.
+
+**104. [თ.9 · კ.33] — გამოთვლა**
+- **კ:** რა მინიმალური სიხშირე უნდა გააჩნდეს DDR4 სტანდარტის მეხსიერების უჯრედებს 3200 მჰც სიხშირის სისტემური პლატის მხარდაჭერისთვის?
+- **პ:** DDR4-3200-ში შიდა სალტის სიხშირეა 200 მჰც, ამიტომ მინიმალური სიხშირე არის 200 მჰც.
+
+**105. [თ.10 · კ.20] — გამოთვლა**
+- **კ:** გამოთვალეთ PCI Express სალტის გამტარუნარიანობა: სამუშაო სიხშირე — 2500 მჰც, ტრასების რაოდენობა — 8, ციკლში გადაცემული მონაცემების რაოდენობა — 0.8.
+- **პ:** 2500 × 8 × 0.8 = 16000 მბიტ/წმ = 2000 მბაიტი/წმ, ანუ 2 გბ/წმ ერთი მიმართულებით. რადგან PCI Express დუპლექსურია, ჯამური ორმხრივი გამტარუნარიანობაა 4 გბ/წმ.
+
+**106. [თ.10 · კ.21] — გამოთვლა**
+- **კ:** გამოთვალეთ PCI Express სალტის გამტარუნარიანობა: სამუშაო სიხშირე — 5000 მჰც, ტრასების რაოდენობა — 16, ციკლში გადაცემული მონაცემების რაოდენობა — 0.8.
+- **პ:** 5000 × 16 × 0.8 = 64000 მბიტ/წმ = 8000 მბაიტი/წმ, ანუ 8 გბ/წმ ერთი მიმართულებით. დუპლექსური რეჟიმით ჯამურად მიიღება 16 გბ/წმ.
+
+**107. [თ.13 · კ.16] — გამოთვლა**
+- **კ:** პროცესორის სიმძლავრეა 120 ვატი. გამოთვალეთ ძაბვის რეგულატორზე მისაწოდებელი დენის ძალა 12 ვოლტი ძაბვის და 80% მარგი ქმედების კოეფიციენტის შემთხვევაში.
+- **პ:** დენი = 120 / (12 × 0.8) = 12.5 ა.
+
+**108. [თ.13 · კ.17] — გამოთვლა**
+- **კ:** პროცესორის სიმძლავრეა 75 ვატი. გამოთვალეთ ძაბვის რეგულატორზე მისაწოდებელი დენის ძალა 12 ვოლტი ძაბვის და 80% მარგი ქმედების კოეფიციენტის შემთხვევაში.
+- **პ:** დენი = 75 / (12 × 0.8) = 7.8 ა.
+
+**109. [თ.13 · კ.19] — გამოთვლა**
+- **კ:** ვიდეოადაპტერის სიმძლავრეა 300 ვატი, ხოლო კვების ბლოკს გააჩნია 10 ამპერიანი ტერმინალები. იანგარიშეთ ვიდეოადაპტერზე მისაწოდებელი დენის ამპერაჟი და განსაზღვრეთ გასართი.
+- **პ:** დენი = 300 / 12 = 25 ა. 10-ამპერიანი ტერმინალებით საჭიროა მინიმუმ სამი +12 ვ ტერმინალი, რადგან ორი მხოლოდ 20 ა-ს გაუძლებს, სამი კი 30 ა-ს. ამიტომ საჭიროა მინიმუმ 6-კონტაქტიანი PCI Express გასართი სამი +12 ვ კონტაქტით ან უფრო ძლიერი ვარიანტი.
+
+**110. [თ.13 · კ.20] — გამოთვლა**
+- **კ:** ვიდეოადაპტერის სიმძლავრეა 250 ვატი, ხოლო კვების ბლოკს გააჩნია 8 ამპერიანი ტერმინალები. იანგარიშეთ ვიდეოადაპტერზე მისაწოდებელი დენის ამპერაჟი და განსაზღვრეთ გასართი.
+- **პ:** დენი = 250 / 12 = 20.83 ა. 8-ამპერიანი ტერმინალებით ორი ხაზი 16 ა-ს გაუძლებს, სამი კი 24 ა-ს. ამიტომ საჭიროა 6-კონტაქტიანი PCI Express გასართი სამი +12 ვ კონტაქტით ან შესაბამისი უფრო ძლიერი გასართი.
+
+**111. [თ.15 · კ.3] — გამოთვლა**
+- **კ:** აღწერეთ, როგორ იანგარიშება მოძებნის საშუალო დრო ვინჩესტერისთვის.
+- **პ:** Average Seek Time არის დრო, რომლის განმავლობაშიც თავაკები ერთი ცილინდრიდან მეორეზე გადაადგილდებიან. მის გამოსათვლელად შემთხვევით ბილიკებზე გადასვლის ჯამური დრო იყოფა ოპერაციების რაოდენობაზე.
+
+**112. [თ.15 · კ.4] — გამოთვლა**
+- **კ:** აღწერეთ, როგორ იანგარიშება მონაცემთა გადაცემის სიჩქარე ვინჩესტერისთვის.
+- **პ:** მაქსიმალური სიჩქარე დამოკიდებულია სექტორში ბაიტების რაოდენობაზე, ბილიკზე სექტორების რაოდენობაზე და დისკის ბრუნვის სიხშირეზე. ფორმულა: MDTR = SPT × 4096 × RPM / 60 ბაიტი/წმ.
+
+**113. [თ.16 · კ.5] — გამოთვლა**
+- **კ:** როგორ განისაზღვრება მონაცემთა გადაცემის სიჩქარე CD-ROM დისკური მოწყობილობებისთვის?
+- **პ:** აუდიო CD-ის 1× სიჩქარეა 150 კბ/წმ. CD-ROM-ის სიჩქარე ამ რიცხვის ჯერადია; მაგალითად, 50× ნიშნავს 7500 კბ/წმ მაქსიმალურ სიჩქარეს.
+
+---
+
+## 3. დასკვნა
+
+თუ 5 ღია კითხვაზე ფსონს დებ, დაიმახსოვრე **Tier S** + **თ.14 Intel-ტექნოლოგიების ბლოკი** (Tier A). შედარებები + დასახელებული ტექნოლოგიები ამ ლექტორის ფინგერპრინტია.
+
+მისი კითხვები ხშირად **ორნაწილიანია** — ამიტომ მოემზადე წყვილებად: ყოველი Tier S/A თემისთვის ასევე გაითვალისწინე სავარაუდო „… და აღწერე/შეადარე [მონათესავე თემა]" მეორე ნაწილი (იხ. 1b ცხრილი).
+
+**გაფრთხილება:** მიდტერმი თავებს 4–6 ფარავდა, ფინალი — 8–17. ეს მისი *სტილია* გადატანილი (საიმედო), მაგრამ მეორე მონიშნული მიდტერმი პროგნოზს კიდევ უფრო დააზუსტებდა. ყველაზე ძლიერი კორექტივი ნებისმიერია, რასაც ის ლექციაზე პირდაპირ უსვამდა ხაზს.
